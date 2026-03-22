@@ -1,0 +1,12 @@
+name: playwright
+version: 1.0.0
+runtime:
+  env: []
+  executables:
+    - node
+    - npx
+    - bash
+  pythonModules: []
+  nodeModules: []
+healthcheck:
+  command: command -v npx && npx playwright --version

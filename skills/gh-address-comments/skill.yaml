@@ -1,0 +1,12 @@
+name: gh-address-comments
+version: 1.0.0
+runtime:
+  env: []
+  executables:
+    - gh
+    - git
+    - python3
+  pythonModules: []
+  nodeModules: []
+healthcheck:
+  command: gh auth status

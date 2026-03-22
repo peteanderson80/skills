@@ -1,0 +1,12 @@
+name: spreadsheet
+version: 1.0.0
+runtime:
+  env: []
+  executables:
+    - python3
+  pythonModules:
+    - openpyxl
+    - pandas
+  nodeModules: []
+healthcheck:
+  command: python3 -c "import openpyxl; import pandas"

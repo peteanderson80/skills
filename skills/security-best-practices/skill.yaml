@@ -1,0 +1,7 @@
+name: security-best-practices
+version: 1.0.0
+runtime:
+  env: []
+  executables: []
+  pythonModules: []
+  nodeModules: []

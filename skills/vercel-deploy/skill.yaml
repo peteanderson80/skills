@@ -1,0 +1,12 @@
+name: vercel-deploy
+version: 1.0.0
+runtime:
+  env: []
+  executables:
+    - bash
+    - npm
+    - node
+  pythonModules: []
+  nodeModules: []
+healthcheck:
+  command: command -v bash && command -v npm

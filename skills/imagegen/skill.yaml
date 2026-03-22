@@ -1,0 +1,13 @@
+name: imagegen
+version: 1.0.0
+runtime:
+  env:
+    - OPENAI_API_KEY
+  executables:
+    - python3
+  pythonModules:
+    - openai
+    - PIL
+  nodeModules: []
+healthcheck:
+  command: python3 -c "import openai; from PIL import Image" && test -n "$OPENAI_API_KEY"

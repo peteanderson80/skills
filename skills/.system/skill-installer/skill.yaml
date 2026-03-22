@@ -1,0 +1,11 @@
+name: skill-installer
+version: 1.0.0
+runtime:
+  env: []
+  executables:
+    - python3
+    - git
+  pythonModules: []
+  nodeModules: []
+healthcheck:
+  command: python3 {skillPath}/scripts/list-skills.py --help

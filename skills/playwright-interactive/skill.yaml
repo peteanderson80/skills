@@ -1,0 +1,11 @@
+name: playwright-interactive
+version: 1.0.0
+runtime:
+  env: []
+  executables:
+    - node
+  pythonModules: []
+  nodeModules:
+    - playwright
+healthcheck:
+  command: node -e "import('playwright').then(() => console.log('ok')).catch(() => process.exit(1))"

@@ -1,0 +1,7 @@
+name: security-threat-model
+version: 1.0.0
+runtime:
+  env: []
+  executables: []
+  pythonModules: []
+  nodeModules: []

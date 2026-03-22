@@ -1,0 +1,11 @@
+# Ignore everything in this Codex home by default.
+*
+
+# Keep the repository metadata and the skill library under version control.
+!.gitignore
+!skills/
+!skills/**
+
+# Still ignore generated Python artifacts inside tracked skill directories.
+__pycache__/
+*.py[cod]

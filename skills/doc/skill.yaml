@@ -1,0 +1,14 @@
+name: doc
+version: 1.0.0
+runtime:
+  env: []
+  executables:
+    - python3
+    - soffice
+    - pdftoppm
+  pythonModules:
+    - docx
+    - pdf2image
+  nodeModules: []
+healthcheck:
+  command: python3 -c "import docx; from pdf2image import convert_from_path" && command -v soffice && command -v pdftoppm

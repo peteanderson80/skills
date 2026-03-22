@@ -1,0 +1,10 @@
+name: jupyter-notebook
+version: 1.0.0
+runtime:
+  env: []
+  executables:
+    - python3
+  pythonModules: []
+  nodeModules: []
+healthcheck:
+  command: python3 {skillPath}/scripts/new_notebook.py --help

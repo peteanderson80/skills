@@ -1,0 +1,15 @@
+name: pdf
+version: 1.0.0
+runtime:
+  env: []
+  executables:
+    - python3
+    - soffice
+    - pdftoppm
+  pythonModules:
+    - reportlab
+    - pdfplumber
+    - pypdf
+  nodeModules: []
+healthcheck:
+  command: python3 -c "import reportlab; import pdfplumber; import pypdf" && command -v pdftoppm && command -v soffice

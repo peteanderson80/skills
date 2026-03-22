@@ -1,0 +1,14 @@
+name: slides
+version: 1.0.0
+runtime:
+  env: []
+  executables:
+    - python3
+    - soffice
+    - pdftoppm
+    - node
+  pythonModules:
+    - pdf2image
+  nodeModules: []
+healthcheck:
+  command: python3 {skillPath}/scripts/render_slides.py --help && command -v pdftoppm && command -v soffice

@@ -1,0 +1,11 @@
+name: develop-web-game
+version: 1.0.0
+runtime:
+  env: []
+  executables:
+    - node
+    - npx
+  pythonModules: []
+  nodeModules: []
+healthcheck:
+  command: npx playwright --version

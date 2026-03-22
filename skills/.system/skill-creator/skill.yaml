@@ -1,0 +1,10 @@
+name: skill-creator
+version: 1.0.0
+runtime:
+  env: []
+  executables:
+    - python3
+  pythonModules: []
+  nodeModules: []
+healthcheck:
+  command: python3 {skillPath}/scripts/init_skill.py --help

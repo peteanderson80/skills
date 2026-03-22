@@ -1,0 +1,12 @@
+name: security-ownership-map
+version: 1.0.0
+runtime:
+  env: []
+  executables:
+    - python3
+    - git
+  pythonModules:
+    - networkx
+  nodeModules: []
+healthcheck:
+  command: python3 -c "import networkx" && command -v git
