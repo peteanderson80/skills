@@ -5,6 +5,7 @@
 !.gitignore
 !skills/
 !skills/**
+!README.md
 
 # Still ignore generated Python artifacts inside tracked skill directories.
 __pycache__/
