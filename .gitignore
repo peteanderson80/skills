@@ -9,3 +9,7 @@
 # Still ignore generated Python artifacts inside tracked skill directories.
 __pycache__/
 *.py[cod]
+
+# Ignore installed Node dependencies inside tracked skill directories.
+/skills/node_modules/
+/skills/**/node_modules/

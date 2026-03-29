@@ -1,0 +1,10 @@
+name: google-slides
+version: 1.0.0
+runtime:
+  env: []
+  executables:
+    - workspace-mcp
+  pythonModules: []
+  nodeModules: []
+healthcheck:
+  command: workspace-mcp --cli list >/dev/null
