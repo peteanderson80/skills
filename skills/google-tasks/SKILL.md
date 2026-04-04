@@ -1,6 +1,6 @@
 ---
 name: google-tasks
-description: "Use when tasks involve Google Tasks task lists, tasks, subtasks, due dates, or task management through workspace-mcp / google_workspace_mcp."
+description: "Use when tasks involve Google Tasks task lists, tasks, subtasks, due dates, or task management through Codexclaw's wrapped Google Workspace CLI."
 ---
 
 # Google Tasks Skill
@@ -11,7 +11,7 @@ description: "Use when tasks involve Google Tasks task lists, tasks, subtasks, d
 
 ## Workflow
 1. Check the configured boundary first.
-2. Use upstream tool names with `workspace-mcp --cli`.
+2. Do not call `workspace-cli` directly. Use `node "$CODEXCLAW_GOOGLE_WORKSPACE_WRAPPER_SCRIPT" <tool_name> key=value ...`.
 3. Use `manage_task` for task mutations and `manage_task_list` for list mutations.
 4. Preserve task hierarchy and due dates when summarizing results.
 
@@ -25,11 +25,12 @@ description: "Use when tasks involve Google Tasks task lists, tasks, subtasks, d
 
 ## Example CLI usage
 ```
-workspace-mcp --cli list_task_lists --args '{}'
-workspace-mcp --cli list_tasks --args '{"task_list_id":"<task-list-id>"}'
-workspace-mcp --cli manage_task --args '{"action":"create","task_list_id":"<task-list-id>","title":"New Task"}'
+node "$CODEXCLAW_GOOGLE_WORKSPACE_WRAPPER_SCRIPT" list_task_lists
+node "$CODEXCLAW_GOOGLE_WORKSPACE_WRAPPER_SCRIPT" list_tasks 'task_list_id=<task-list-id>'
+node "$CODEXCLAW_GOOGLE_WORKSPACE_WRAPPER_SCRIPT" manage_task 'action=create' 'task_list_id=<task-list-id>' 'title=New Task'
 ```
 
 ## Notes
 - In read-only mode, limit yourself to `list_tasks`, `get_task`, `list_task_lists`, and `get_task_list`.
+- Do not pass `user_google_email`; the wrapper injects it.
 - Do not assume task-list write access unless the boundary allows it.

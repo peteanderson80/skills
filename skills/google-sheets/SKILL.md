@@ -1,6 +1,6 @@
 ---
 name: google-sheets
-description: "Use when tasks involve Google Sheets spreadsheets, ranges, cells, formatting, spreadsheet creation, or analysis through workspace-mcp / google_workspace_mcp."
+description: "Use when tasks involve Google Sheets spreadsheets, ranges, cells, formatting, spreadsheet creation, or analysis through Codexclaw's wrapped Google Workspace CLI."
 ---
 
 # Google Sheets Skill
@@ -11,7 +11,7 @@ description: "Use when tasks involve Google Sheets spreadsheets, ranges, cells, 
 
 ## Workflow
 1. Check `CODEXCLAW_GOOGLE_WORKSPACE_MODE` and `CODEXCLAW_GOOGLE_WORKSPACE_BOUNDARY` first.
-2. Use upstream tool names via `workspace-mcp --cli ...`.
+2. Do not call `workspace-cli` directly. Use `node "$CODEXCLAW_GOOGLE_WORKSPACE_WRAPPER_SCRIPT" <tool_name> key=value ...`.
 3. Prefer narrow range reads and writes instead of oversized sheet operations.
 4. Respect read-only mode and avoid value or formatting mutations when writes are not allowed.
 
@@ -29,11 +29,11 @@ description: "Use when tasks involve Google Sheets spreadsheets, ranges, cells, 
 
 ## Example CLI usage
 ```
-workspace-mcp --cli list_spreadsheets --args '{"max_results":10}'
-workspace-mcp --cli read_sheet_values --args '{"spreadsheet_id":"<spreadsheet-id>","range":"Sheet1!A1:C10"}'
-workspace-mcp --cli modify_sheet_values --args '{"action":"update","spreadsheet_id":"<spreadsheet-id>","range":"Sheet1!A1:C1","values":[["foo","bar","baz"]]}'
+node "$CODEXCLAW_GOOGLE_WORKSPACE_WRAPPER_SCRIPT" list_spreadsheets max_results=10
+node "$CODEXCLAW_GOOGLE_WORKSPACE_WRAPPER_SCRIPT" read_sheet_values 'spreadsheet_id=<spreadsheet-id>' 'range=Sheet1!A1:C10'
+node "$CODEXCLAW_GOOGLE_WORKSPACE_WRAPPER_SCRIPT" modify_sheet_values 'action=update' 'spreadsheet_id=<spreadsheet-id>' 'range=Sheet1!A1:C1' 'values=[["foo","bar","baz"]]'
 ```
 
 ## Notes
 - `list_spreadsheets` uses Drive-backed discovery; that is normal for this upstream project.
-- Reuse the operator-defined selection args instead of choosing broader services inside the skill.
+- Do not pass `user_google_email`; the wrapper injects it.

@@ -3,8 +3,9 @@ version: 1.0.0
 runtime:
   env: []
   executables:
-    - workspace-mcp
+    - node
+    - workspace-cli
   pythonModules: []
   nodeModules: []
 healthcheck:
-  command: workspace-mcp --cli list >/dev/null
+  command: node --version >/dev/null && workspace-cli --help >/dev/null

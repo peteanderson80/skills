@@ -1,6 +1,6 @@
 ---
 name: google-docs
-description: "Use when tasks involve Google Docs documents, document text, markdown export, find/replace, formatting, or document comments through workspace-mcp / google_workspace_mcp."
+description: "Use when tasks involve Google Docs documents, document text, markdown export, find/replace, formatting, or comments through Codexclaw's wrapped Google Workspace CLI."
 ---
 
 # Google Docs Skill
@@ -11,7 +11,7 @@ description: "Use when tasks involve Google Docs documents, document text, markd
 
 ## Workflow
 1. Check the configured Google Workspace boundary first.
-2. Use upstream tool names via `workspace-mcp --cli`.
+2. Do not call `workspace-cli` directly. Use `node "$CODEXCLAW_GOOGLE_WORKSPACE_WRAPPER_SCRIPT" <tool_name> key=value ...`.
 3. Prefer `get_doc_content` or `get_doc_as_markdown` for reads, and `modify_doc_text` for text edits.
 4. Respect read-only mode and avoid create or modify tools when writes are not allowed.
 
@@ -31,11 +31,12 @@ description: "Use when tasks involve Google Docs documents, document text, markd
 
 ## Example CLI usage
 ```
-workspace-mcp --cli search_docs --args '{"query":"project plan","page_size":10}'
-workspace-mcp --cli get_doc_content --args '{"document_id":"<document-id>"}'
-workspace-mcp --cli modify_doc_text --args '{"document_id":"<document-id>","action":"append","text":"Hello, world!"}'
+node "$CODEXCLAW_GOOGLE_WORKSPACE_WRAPPER_SCRIPT" search_docs 'query=project plan' page_size=10
+node "$CODEXCLAW_GOOGLE_WORKSPACE_WRAPPER_SCRIPT" get_doc_content 'document_id=<document-id>'
+node "$CODEXCLAW_GOOGLE_WORKSPACE_WRAPPER_SCRIPT" modify_doc_text 'document_id=<document-id>' 'action=append' 'text=Hello, world!'
 ```
 
 ## Notes
 - Some Docs operations use both Docs and Drive scopes upstream. Stay within the configured operator boundary.
+- Do not pass `user_google_email`; the wrapper injects it.
 - Prefer markdown export when the user needs the document content as reusable text.

@@ -1,6 +1,6 @@
 ---
 name: google-slides
-description: "Use when tasks involve Google Slides presentations, slide creation, slide updates, thumbnails, or presentation comments through workspace-mcp / google_workspace_mcp."
+description: "Use when tasks involve Google Slides presentations, slide creation, slide updates, thumbnails, or comments through Codexclaw's wrapped Google Workspace CLI."
 ---
 
 # Google Slides Skill
@@ -11,7 +11,7 @@ description: "Use when tasks involve Google Slides presentations, slide creation
 
 ## Workflow
 1. Check the configured Google Workspace boundary first.
-2. Use upstream tool names via `workspace-mcp --cli`.
+2. Do not call `workspace-cli` directly. Use `node "$CODEXCLAW_GOOGLE_WORKSPACE_WRAPPER_SCRIPT" <tool_name> key=value ...`.
 3. Use `get_presentation` or `get_page` for reads and `batch_update_presentation` for structural edits.
 4. Respect read-only mode and avoid create or update tools when writes are not allowed.
 
@@ -26,11 +26,12 @@ description: "Use when tasks involve Google Slides presentations, slide creation
 
 ## Example CLI usage
 ```
-workspace-mcp --cli get_presentation --args '{"presentation_id":"<presentation-id>"}'
-workspace-mcp --cli get_page --args '{"presentation_id":"<presentation-id>","page_object_id":"<page-id>"}'
-workspace-mcp --cli create_presentation --args '{"title":"Quarterly Review"}'
+node "$CODEXCLAW_GOOGLE_WORKSPACE_WRAPPER_SCRIPT" get_presentation 'presentation_id=<presentation-id>'
+node "$CODEXCLAW_GOOGLE_WORKSPACE_WRAPPER_SCRIPT" get_page 'presentation_id=<presentation-id>' 'page_object_id=<page-id>'
+node "$CODEXCLAW_GOOGLE_WORKSPACE_WRAPPER_SCRIPT" create_presentation 'title=Quarterly Review'
 ```
 
 ## Notes
 - Complex slide edits usually go through `batch_update_presentation`, not a simple write subcommand.
+- Do not pass `user_google_email`; the wrapper injects it.
 - Stay within the configured service, tier, and read-only boundary.

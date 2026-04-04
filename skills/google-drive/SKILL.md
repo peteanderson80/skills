@@ -1,6 +1,6 @@
 ---
 name: google-drive
-description: "Use when tasks involve Google Drive files, folders, search, downloads, uploads, sharing, or file management through workspace-mcp / google_workspace_mcp."
+description: "Use when tasks involve Google Drive files, folders, search, downloads, uploads, sharing, or file management through Codexclaw's wrapped Google Workspace CLI."
 ---
 
 # Google Drive Skill
@@ -11,7 +11,7 @@ description: "Use when tasks involve Google Drive files, folders, search, downlo
 
 ## Workflow
 1. Check the configured boundary first.
-2. Use upstream tool names via `workspace-mcp --cli`.
+2. Do not call `workspace-cli` directly. Use `node "$CODEXCLAW_GOOGLE_WORKSPACE_WRAPPER_SCRIPT" <tool_name> key=value ...`.
 3. Prefer `search_drive_files` for discovery and `get_drive_file_content` for read access.
 4. Respect read-only mode before attempting file creation, copying, updates, or sharing changes.
 
@@ -30,11 +30,12 @@ description: "Use when tasks involve Google Drive files, folders, search, downlo
 
 ## Example CLI usage
 ```
-workspace-mcp --cli search_drive_files --args '{"query":"report pdf","page_size":10}'
-workspace-mcp --cli get_drive_file_content --args '{"file_id":"<file-id>"}'
-workspace-mcp --cli create_drive_file --args '{"name":"report.txt","content":"hello world"}'
+node "$CODEXCLAW_GOOGLE_WORKSPACE_WRAPPER_SCRIPT" search_drive_files 'query=report pdf' page_size=10
+node "$CODEXCLAW_GOOGLE_WORKSPACE_WRAPPER_SCRIPT" get_drive_file_content 'file_id=<file-id>'
+node "$CODEXCLAW_GOOGLE_WORKSPACE_WRAPPER_SCRIPT" create_drive_file 'name=report.txt' 'content=hello world'
 ```
 
 ## Notes
 - The upstream Drive toolset also covers some Docs import and sharing workflows.
+- Do not pass `user_google_email`; the wrapper injects it.
 - Do not widen file access or sharing permissions beyond the configured operator boundary.
